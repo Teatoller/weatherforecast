@@ -1,40 +1,67 @@
 import React, { Component } from "react";
 import "./App.css";
 
+import "bootstrap/dist/css/bootstrap.min.css";
+
+import axios from "axios";
+import Weather from "./Components/Weather";
+import Coord from "./Components/Coord";
+import Base from "./Components/Base";
+import Main from "./Components/Main";
+import Wind from "./Components/Wind";
+import Rain from "./Components/Rain";
+import Sys from "./Components/Sys";
+
 class App extends Component {
   constructor() {
     super();
     this.state = {
+      latitude: 1.2921,
+      longitude: 36.8219,
       coord: {},
       weather: [],
       base: "",
       main: {},
       wind: {},
       rain: [],
-      clouds: {},
-      dt: 0,
       sys: {}
     };
+    this.handleLatChange = this.handleLatChange.bind(this);
+    this.handleLonChange = this.handleLonChange.bind(this);
   }
-  // "$apiUrl?lon={$longitude}&lat={$latitude}"
+
+  handleLatChange = event => {
+    const target = event.target;
+    const value = target.value;
+
+    this.setState(prevState => ({
+      latitude: (prevState.latitude = value)
+    }));
+  };
+
+  handleLonChange = event => {
+    const target = event.target;
+    const value = target.value;
+
+    this.setState(prevState => ({
+      longitude: (prevState.longitude = value)
+    }));
+  };
+
   componentDidMount() {
-    let latitude = 35;
-    let longitude = 159;
-    fetch(
-      `https://fcc-weather-api.glitch.me//api/current?lat=${latitude}&lon=${longitude}`
-    )
-      .then(response => response.json())
-      .then(responseData => {
+    axios
+      .get(
+        `https://fcc-weather-api.glitch.me//api/current?lat=${this.state.latitude}&lon=${this.state.longitude}`
+      )
+      .then(response => {
         this.setState({
-          coord: responseData.coord,
-          weather: responseData.weather,
-          base: responseData.base,
-          main: responseData.main,
-          wind: responseData.wind,
-          rain: responseData.rain,
-          clouds: responseData.clouds,
-          dt: responseData.dt,
-          sys: responseData.sys
+          // coord: response.data.coord,
+          weather: response.data.weather,
+          base: response.data.base,
+          main: response.data.main,
+          wind: response.data.wind,
+          rain: response.data.rain,
+          sys: response.data.sys
         });
       })
       .catch(error => {
@@ -43,17 +70,46 @@ class App extends Component {
   }
 
   render() {
-    console.log(this.state.coord);
-    console.log(this.state.weather);
-    console.log(this.state.base);
-    console.log(this.state.main);
-    console.log(this.state.wind);
-    console.log(this.state.rain);
-    console.log(this.state.clouds);
-    console.log(this.state.dt);
-    console.log(this.state.sys);
+    console.log("lat........>...", this.state.latitude);
+    console.log("lon,,,>,,,,", this.state.longitude);
+    console.log("raiiin", this.state.rain);
+    return (
+      <div>
+        <div>
+          <Coord
+            coord={this.state.coord}
+            latitude={this.state.latitude}
+            longitude={this.state.longitude}
+            handleLatChange={this.handleLatChange}
+            handleLonChange={this.handleLonChange}
+          />
+        </div>
 
-    return <h1>Weather</h1>;
+        <div>
+          <Weather weather={this.state.weather} />
+        </div>
+
+        <div>
+          <Base base={this.state.base} />
+        </div>
+
+        <div>
+          <Sys sys={this.state.sys} />
+        </div>
+
+        <div>
+          <Main main={this.state.main} />
+        </div>
+
+        <div>
+          <Wind wind={this.state.wind} />
+        </div>
+
+        <div>
+          <Rain rain={this.state.rain} />
+        </div>
+      </div>
+    );
   }
 }
 
