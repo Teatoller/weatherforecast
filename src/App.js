@@ -18,7 +18,10 @@ class App extends Component {
     this.state = {
       latitude: 1.2921,
       longitude: 36.8219,
-      coord: {},
+      coord: {
+        lat: 1.29,
+        lon: 36.82
+      },
       weather: [],
       base: "",
       main: {},
@@ -37,6 +40,11 @@ class App extends Component {
     this.setState(prevState => ({
       latitude: (prevState.latitude = value)
     }));
+
+    this.setState(prevState => ({
+      lat: (prevState.coord.lat = value)
+    }));
+
   };
 
   handleLonChange = event => {
@@ -46,6 +54,11 @@ class App extends Component {
     this.setState(prevState => ({
       longitude: (prevState.longitude = value)
     }));
+
+    this.setState(prevState => ({
+      lon: (prevState.coord.lon = value)
+    }));
+
   };
 
   componentDidMount() {
@@ -55,7 +68,7 @@ class App extends Component {
       )
       .then(response => {
         this.setState({
-          // coord: response.data.coord,
+          coord: response.data.coord,
           weather: response.data.weather,
           base: response.data.base,
           main: response.data.main,
@@ -72,7 +85,6 @@ class App extends Component {
   render() {
     console.log("lat........>...", this.state.latitude);
     console.log("lon,,,>,,,,", this.state.longitude);
-    console.log("raiiin", this.state.rain);
     return (
       <div>
         <div>

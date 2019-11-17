@@ -1,7 +1,7 @@
 import React from "react";
 
 function Rain(props) {
-  console.log("rain>>", props);
+  // console.log("rain>>", props);
 
   // const data = props.rain;
   return (
