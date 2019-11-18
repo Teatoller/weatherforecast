@@ -62,6 +62,14 @@ class App extends Component {
   };
 
   componentDidMount() {
+    this.getWeatherData();
+  }
+
+  onSubmit = () => {
+    this.getWeatherData();
+  }
+
+  getWeatherData = () => {
     axios
       .get(
         `https://fcc-weather-api.glitch.me//api/current?lat=${this.state.latitude}&lon=${this.state.longitude}`
@@ -94,6 +102,7 @@ class App extends Component {
             longitude={this.state.longitude}
             handleLatChange={this.handleLatChange}
             handleLonChange={this.handleLonChange}
+            onSubmit={this.onSubmit}
           />
         </div>
 

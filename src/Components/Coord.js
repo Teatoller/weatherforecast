@@ -40,34 +40,10 @@ function Coord(props) {
           </Form.Text>
         </Form.Group>
 
-        <Button variant="primary" type="submit">
+        <Button variant="primary" type="button" onClick={props.onSubmit}>
           Submit
         </Button>
       </Form>
-      <hr />
-      {/* <div>
-        <form>
-          <label>
-            Latitude:
-            <input
-              name="latitude"
-              type="number"
-              value={props.latitude}
-              onChange={props.handleLatChange}
-            />
-          </label>
-          <br />
-          <label>
-            Longitude:
-            <input
-              name="longitude"
-              type="number"
-              value={props.longitude}
-              onChange={props.handleLonChange}
-            />
-          </label>
-        </form>
-      </div> */}
     </div>
   );
 }
