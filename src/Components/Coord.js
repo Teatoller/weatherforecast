@@ -41,7 +41,7 @@ function Coord(props) {
           </Form.Text>
         </Form.Group>
 
-        <Button variant="primary" type="submit">
+        <Button variant="primary" type="button" onClick={props.onSubmit}>
           Submit
         </Button>
       </Form>
