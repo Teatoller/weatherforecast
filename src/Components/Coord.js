@@ -2,11 +2,7 @@ import React from "react";
 import { Form, Button } from "react-bootstrap";
 
 function Coord(props) {
-  console.log("coor>>", props);
-
   const data = props.coord;
-
-  console.log(".....>..>", data);
 
   return (
     <div>
@@ -53,7 +49,7 @@ function Coord(props) {
           target="_blank"
           rel="noopener noreferrer"
         >
-          Use this link to get the coordinates of a specific location.
+          Use this link to get coordinates of a specific location
         </a>
       </p>
     </div>

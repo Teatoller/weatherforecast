@@ -89,8 +89,6 @@ class App extends Component {
   };
 
   render() {
-    console.log("lat........>...", this.state.latitude);
-    console.log("lon,,,>,,,,", this.state.longitude);
     return (
       <div>
         <div>
